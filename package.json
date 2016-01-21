@@ -1,6 +1,6 @@
 {
   "name": "nagoya",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Opinionated? validation library",
   "main": "lib/index.js",
   "scripts": {
