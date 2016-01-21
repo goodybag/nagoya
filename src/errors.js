@@ -1,10 +1,12 @@
 export function ValidationError(message, details = {}) {
     const {
-        columns = {}
+        columns = {},
+        value = null
     } = details;
 
     this.message = message;
     this.columns = columns;
+    this.value = value;
 
     if (message instanceof Error) {
         this.message = message.message;

@@ -27,6 +27,8 @@ export function schema(schema, options = {}) {
                     columnChecker(attrs[columnName], attrs);
                 } catch (err) {
                     if (err instanceof ValidationError) {
+                        err.value = attrs[columnName];
+
                         (columns || (columns = {}))[columnName] = err;
                     } else {
                         throw err;
@@ -38,7 +40,9 @@ export function schema(schema, options = {}) {
         });
 
         if (columns != null) {
-            throw new ValidationError(reportColumns(columns), {columns});
+            throw new ValidationError(reportColumns(columns), {
+                columns, value: attrs
+            });
         }
     }
 }
