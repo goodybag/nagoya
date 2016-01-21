@@ -60,10 +60,6 @@ export function isInt(value, message, type) {
     return assert(validator.isInt(value), message, type);
 }
 
-export function isAfter(value, message, type) {
-    return assert(validator.isAfter(value), message, type);
-}
-
 export function isAlpha(value, message, type) {
     return assert(validator.isAlpha(value), message, type);
 }
