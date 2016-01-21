@@ -112,3 +112,7 @@ export function isLowercase(value, message, type) {
 export function matches(value, regex, message, type) {
     return assert(validator.matches(value, regex), message, type);
 }
+
+export function isDate(value, message, type) {
+    return assert(validator.isDate(value), message, type);
+}

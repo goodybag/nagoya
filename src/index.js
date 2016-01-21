@@ -19,5 +19,6 @@ export {
     isUUID,
     isUppercase,
     isLowercase,
-    matches
+    matches,
+    isDate
 } from './validator';
