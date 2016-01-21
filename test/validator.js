@@ -23,7 +23,7 @@ const schema = {
 };
 
 describe('schema', () => {
-    it('should work', () => {
+    it('should work with default stuffs', () => {
         const validate = nagoya.schema(schema);
 
         expect(testValidator).toThrow(ValidationError, [
@@ -37,6 +37,20 @@ describe('schema', () => {
                 username: '*asdf^',
                 password: 'foo321',
                 email: 'bob@@foo.com'
+            });
+        }
+    });
+
+    it('should work with nullable columns', () => {
+        const validate = nagoya.schema(schema, {nullableColumns: true});
+
+        expect(testValidator).toNotThrow();
+
+        function testValidator() {
+            validate({
+                username: null,
+                password: null,
+                email: null
             });
         }
     });

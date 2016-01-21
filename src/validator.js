@@ -12,7 +12,8 @@ export function assert(condition, message = 'is invalid', type = ValidationError
 
 export function schema(schema, options = {}) {
     const {
-        subset = true
+        subset = true,
+        nullableColumns = false
     } = options;
 
     return validate;
@@ -21,7 +22,7 @@ export function schema(schema, options = {}) {
         let columns = null;
 
         each(schema, (columnChecker, columnName) => {
-            if (attrs.hasOwnProperty(columnName)) {
+            if (nullableColumns ? attrs[columnName] != null : attrs.hasOwnProperty(columnName)) {
                 try {
                     columnChecker(attrs[columnName], attrs);
                 } catch (err) {
