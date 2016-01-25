@@ -10,21 +10,22 @@ export function assert(condition, message = 'is invalid', type = ValidationError
     }
 }
 
-export function schema(schema, options = {}) {
-    const {
-        subset = true,
-        nullableColumns = false
-    } = options;
-
+export function schema(schema, schemaOptions = {}) {
     return validate;
 
-    function validate(attrs) {
+    function validate(attrs, validationOptions) {
+        const {
+            subset = true,
+            nullableColumns = false,
+            context = {}
+        } = {...schemaOptions, ...validationOptions};
+
         let columns = null;
 
         each(schema, (columnChecker, columnName) => {
             if (nullableColumns ? attrs[columnName] != null : attrs.hasOwnProperty(columnName)) {
                 try {
-                    columnChecker(attrs[columnName], attrs);
+                    columnChecker.call(context, attrs[columnName], attrs, context);
                 } catch (err) {
                     if (err instanceof ValidationError) {
                         err.value = attrs[columnName];
