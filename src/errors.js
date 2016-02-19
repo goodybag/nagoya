@@ -16,9 +16,8 @@ export function ValidationError(message, details = {}) {
     }
 }
 
-ValidationError.prototype = Object.create(Error);
+ValidationError.prototype = Object.create(Error.prototype);
 ValidationError.prototype.constructor = ValidationError;
-ValidationError.prototype.toString = Error.prototype.toString;
 
 Object.defineProperty(ValidationError.prototype, 'name', {
     value: 'ValidationError'
