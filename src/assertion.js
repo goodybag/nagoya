@@ -67,16 +67,23 @@ export class Assertion {
     }
 
     validate(opts) {
+        const error = this.error(opts, Assertion.prototype.validate);
+
+        if (error) {
+            throw error;
+        }
+    }
+
+    error(opts, stackFn = Assertion.prototype.error) {
         const result = this.run(opts);
 
         if (result == null || result.length === 0) {
-            return;
+            return null;
         } else {
             const messages = result.map(err => err.message);
 
-            throw new ValidationResultError(`Validation failed: ${messages.join(', ')}`, {
-                stackFn: Assertion.prototype.validate,
-                errors: result
+            return new ValidationResultError(`Validation failed: ${messages.join(', ')}`, {
+                stackFn, errors: result
             });
         }
     }
