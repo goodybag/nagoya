@@ -5,4 +5,4 @@ export {
 
 export {Assertion} from './assertion';
 
-export {assert, always, nullable} from './helpers';
+export {assert, always, nullable, concat, empty} from './helpers';

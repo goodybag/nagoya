@@ -15,6 +15,14 @@ export function always(expr) {
     });
 }
 
+export function empty() {
+    return always(null);
+}
+
+export function concat(assertions) {
+    return assertions.reduce((a, b) => a.concat(b), empty());
+}
+
 export function nullable(columnName = null, expr, details = []) {
     expr = toExpression(expr)
     const assertion = makeAssertion(opts => expr(opts) != null,
